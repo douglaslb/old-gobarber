@@ -8,5 +8,6 @@ module.exports = {
     timestamps: true,
     undescored: true,
     underscoredAll: true,
+    freezeTableName: true,
   },
 }
