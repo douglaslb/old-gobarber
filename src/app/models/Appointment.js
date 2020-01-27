@@ -10,7 +10,7 @@ class Appointment extends Model {
       {
         sequelize,
         freezeTableName: true,
-        tableName: 'appointments  ',
+        tableName: 'appointments',
       }
     )
     return this
