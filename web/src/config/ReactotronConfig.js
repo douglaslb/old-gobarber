@@ -1,10 +1,12 @@
 import Reactotron from 'reactotron-react-js'
+import { reactotronRedux } from 'reactotron-redux'
+import reactotronReduxSaga from 'reactotron-redux-saga'
 
 if (process.env.NODE_ENV === 'development') {
-  const tron = Reactotron.configure({
-    port: 3000,
-    host: '192.168.0.124',
-  }).connect()
+  const tron = Reactotron.configure()
+    .connect()
+    .use(reactotronRedux())
+    .use(reactotronReduxSaga())
 
   tron.clear()
 
