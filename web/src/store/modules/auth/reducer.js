@@ -34,6 +34,7 @@ export default function auth(state = INITIAL_STATE, action) {
       case '@auth/SIGN_OUT': {
         draft.token = null  
         draft.signed = false
+        break
       }
       default:
     }
