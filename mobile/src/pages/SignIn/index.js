@@ -31,11 +31,13 @@ export default function SignIn() {
           <FormInput
             icon="mail-outline"
             keyboardType="email-address"
-            autoCorrect={false}
+            autoCorrect={true}
+            autoCompleteType="off"
             autoCapitalize="none"
             placeholder="Digite seu e-mail"
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
+            blurOnSubmit={false}
           />
 
           <FormInput
@@ -43,8 +45,7 @@ export default function SignIn() {
             secureTextEntry
             placeholder="Sua senha secreta"
             ref={passwordRef}
-            returnKeyType="send"
-            onSubmitEditing={handleSubmit}
+            returnKeyType="done"
           />
 
           <SubmitButton onPress={() => {}}>Acessar</SubmitButton>
