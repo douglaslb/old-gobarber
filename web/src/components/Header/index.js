@@ -28,10 +28,10 @@ export default function Header() {
             </div>
             <img
               src={
-                profile.avatar.url ||
-                'https://api.adorable.io/avatars/50/abott@adorable.png'
+                (profile.avatar && profile.avatar.url) ||
+                `https://ui-avatars.com/api/?background=7159c1&color=fff&name=${profile.name}`
               }
-              alt="Douglas Lima"
+              alt={profile.name}
             />
           </Profile>
         </aside>

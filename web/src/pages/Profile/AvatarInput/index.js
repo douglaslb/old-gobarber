@@ -4,11 +4,12 @@ import api from '~/services/api'
 
 import { Container } from './styles'
 
-export default function AvatarInput() {
+export default function AvatarInput({ profile }) {
+  console.log(profile)
   const { defaultValue, registerField } = useField('avatar')
 
-  const [file, setFile] = useState(defaultValue && defaultValue.id)
   const [preview, setPreview] = useState(defaultValue && defaultValue.url)
+  const [file, setFile] = useState(defaultValue && defaultValue.id)
 
   const ref = useRef()
 
@@ -40,7 +41,8 @@ export default function AvatarInput() {
       <label htmlFor="avatar">
         <img
           src={
-            preview || 'https://api.adorable.io/avatars/50/abott@adorable.png'
+            preview ||
+            `https://ui-avatars.com/api/?background=7159c1&color=fff&name=${profile.name}&size=128`
           }
           alt=""
         />
@@ -49,8 +51,8 @@ export default function AvatarInput() {
           type="file"
           id="avatar"
           accept="image/*"
-          data-file={file}
           onChange={handleChange}
+          data-file={file}
           ref={ref}
         />
       </label>
