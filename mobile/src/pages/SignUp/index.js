@@ -1,14 +1,16 @@
 import React, {useRef} from 'react'
 import {Image} from 'react-native'
 import {useNavigation} from '@react-navigation/native'
+import {useDispatch} from 'react-redux'
 
 import logo from '~/assets/logo.png'
-
+import {Form} from '@unform/mobile'
 import Background from '~/components/Background'
+import {signUpRequest} from '~/store/modules/auth/actions'
 
 import {
   Container,
-  Form,
+  FormView,
   FormInput,
   SubmitButton,
   SignLink,
@@ -17,53 +19,65 @@ import {
 
 export default function SignUp() {
   const {navigate} = useNavigation()
+  const dispatch = useDispatch()
 
   const passwordRef = useRef()
   const emailRef = useRef()
+  const formRef = useRef(null)
 
-  const handleSubmit = () => {}
+  const handleSubmit = ({name, email, password}) => {
+    dispatch(signUpRequest(name, email, password))
+  }
 
   return (
     <Background>
       <Container>
         <Image source={logo} />
+        <FormView>
+          <Form ref={formRef} onSubmit={handleSubmit}>
+            <FormInput
+              icon="person-outline"
+              name="name"
+              autoCorrect={false}
+              autoCompleteType="off"
+              autoCapitalize="words"
+              placeholder="Digite seu nome completo"
+              returnKeyType="next"
+              onSubmitEditing={() => emailRef.current.focus()}
+              blurOnSubmit={false}
+            />
 
-        <Form>
-          <FormInput
-            icon="person-outline"
-            autoCorrect={false}
-            autoCompleteType="off"
-            autoCapitalize="words"
-            placeholder="Digite seu nome completo"
-            returnKeyType="next"
-            onSubmitEditing={() => emailRef.current.focus()}
-            blurOnSubmit={false}
-          />
+            <FormInput
+              icon="mail-outline"
+              name="email"
+              type="email"
+              keyboardType="email-address"
+              autoCorrect={false}
+              autoCompleteType="off"
+              autoCapitalize="none"
+              placeholder="Digite seu e-mail"
+              ref={emailRef}
+              returnKeyType="next"
+              onSubmitEditing={() => passwordRef.current.focus()}
+              blurOnSubmit={false}
+            />
 
-          <FormInput
-            icon="mail-outline"
-            keyboardType="email-address"
-            autoCorrect={false}
-            autoCompleteType="off"
-            autoCapitalize="none"
-            placeholder="Digite seu e-mail"
-            ref={emailRef}
-            returnKeyType="next"
-            onSubmitEditing={() => passwordRef.current.focus()}
-            blurOnSubmit={false}
-          />
+            <FormInput
+              icon="lock-outline"
+              secureTextEntry
+              name="password"
+              type="password"
+              placeholder="Sua senha secreta"
+              ref={passwordRef}
+              returnKeyType="done"
+              onSubmitEditing={handleSubmit}
+            />
 
-          <FormInput
-            icon="lock-outline"
-            secureTextEntry
-            placeholder="Sua senha secreta"
-            ref={passwordRef}
-            returnKeyType="done"
-            onSubmitEditing={handleSubmit}
-          />
-
-          <SubmitButton onPress={handleSubmit}>Acessar</SubmitButton>
-        </Form>
+            <SubmitButton onPress={() => formRef.current.submitForm()}>
+              Acessar
+            </SubmitButton>
+          </Form>
+        </FormView>
 
         <SignLink onPress={() => navigate('SignIn')}>
           <SignLinkText>Já possuí conta? Entrar</SignLinkText>

@@ -4,9 +4,7 @@ import {useDispatch} from 'react-redux'
 import {useNavigation} from '@react-navigation/native'
 
 import logo from '~/assets/logo.png'
-
 import {Form} from '@unform/mobile'
-
 import Background from '~/components/Background'
 import {signInRequest} from '~/store/modules/auth/actions'
 
@@ -27,8 +25,8 @@ export default function SignIn() {
 
   const {navigate} = useNavigation()
 
-  const handleSubmit = data => {
-    console.tron.log(data)
+  const handleSubmit = ({email, password}) => {
+    disapatch(signInRequest(email, password))
   }
 
   return (
@@ -55,10 +53,10 @@ export default function SignIn() {
             <FormInput
               icon="lock-outline"
               secureTextEntry
-              placeholder="Sua senha secreta"
-              ref={passwordRef}
               name="password"
               type="password"
+              placeholder="Sua senha secreta"
+              ref={passwordRef}
               returnKeyType="done"
             />
 
