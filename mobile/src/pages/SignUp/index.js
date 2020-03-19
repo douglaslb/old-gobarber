@@ -1,7 +1,7 @@
 import React, {useRef} from 'react'
 import {Image} from 'react-native'
 import {useNavigation} from '@react-navigation/native'
-import {useDispatch} from 'react-redux'
+import {useDispatchm, useSelector} from 'react-redux'
 
 import logo from '~/assets/logo.png'
 import {Form} from '@unform/mobile'
@@ -24,6 +24,8 @@ export default function SignUp() {
   const passwordRef = useRef()
   const emailRef = useRef()
   const formRef = useRef(null)
+
+  const loading = useSelector(state => state.auth.loading)
 
   const handleSubmit = ({name, email, password}) => {
     dispatch(signUpRequest(name, email, password))
@@ -73,8 +75,10 @@ export default function SignUp() {
               onSubmitEditing={handleSubmit}
             />
 
-            <SubmitButton onPress={() => formRef.current.submitForm()}>
-              Acessar
+            <SubmitButton
+              loading={loading}
+              onPress={() => formRef.current.submitForm()}>
+              Criar conta
             </SubmitButton>
           </Form>
         </FormView>

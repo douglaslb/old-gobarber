@@ -1,6 +1,6 @@
 import React, {useRef} from 'react'
 import {Image} from 'react-native'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {useNavigation} from '@react-navigation/native'
 
 import logo from '~/assets/logo.png'
@@ -24,6 +24,8 @@ export default function SignIn() {
   const formRef = useRef(null)
 
   const {navigate} = useNavigation()
+
+  const loading = useSelector(state => state.auth.loading)
 
   const handleSubmit = ({email, password}) => {
     disapatch(signInRequest(email, password))
@@ -60,7 +62,9 @@ export default function SignIn() {
               returnKeyType="done"
             />
 
-            <SubmitButton onPress={() => formRef.current.submitForm()}>
+            <SubmitButton
+              loading={loading}
+              onPress={() => formRef.current.submitForm()}>
               Acessar
             </SubmitButton>
           </Form>
