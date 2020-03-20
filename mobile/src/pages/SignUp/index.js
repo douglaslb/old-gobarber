@@ -1,7 +1,7 @@
 import React, {useRef} from 'react'
 import {Image} from 'react-native'
 import {useNavigation} from '@react-navigation/native'
-import {useDispatchm, useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
 import logo from '~/assets/logo.png'
 import {Form} from '@unform/mobile'
